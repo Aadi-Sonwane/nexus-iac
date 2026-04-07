@@ -61,14 +61,50 @@ terraform apply
 ### 📁 Project Structure
 ```Plaintext
 .
-├── modules/
-│   ├── infra/               # VPC, DNS, LBs, Storage
-│   └── app/                 # ASG, IAM, Cloud-init
-├── scripts/                 # Shell scripts for Nexus setup
-└── stages/
-    └── prelive/             # Prelive environment deployment
-        ├── infra/           # Entry point for networking
-        └── app/             # Entry point for the server
+├── Readme.md
+├── backend
+│   ├── main.tf
+│   └── variables.tf
+├── modules
+│   ├── app
+│   │   ├── asg.tf
+│   │   ├── cloud_init.tf
+│   │   ├── iam.tf
+│   │   ├── outputs.tf
+│   │   └── variables.tf
+│   └── infra
+│       ├── dns_ssl.tf
+│       ├── load_balancers.tf
+│       ├── outputs.tf
+│       ├── route53.tf
+│       ├── security_groups.tf
+│       ├── storage.tf
+│       ├── variables.tf
+│       └── vpc.tf
+├── scripts
+│   ├── amazon-time-sync.sh
+│   ├── cloudwatch-agent.sh
+│   ├── install-nexus.sh
+│   ├── iptables.sh
+│   ├── setup-efs.sh
+│   └── templates
+│       └── cw-agent-config.json.tftpl
+└── stages
+    └── prelive
+        ├── app
+        │   ├── data.tf
+        │   ├── main.tf
+        │   ├── outputs.tf
+        │   ├── provider.tf
+        │   ├── terraform.tfvars
+        │   └── variables.tf
+        └── infra
+            ├── main.tf
+            ├── outputs.tf
+            ├── provider.tf
+            ├── terraform.tfvars
+            └── variables.tf
+
 ```
 ### 🔗 Accessing the Portal
 Once the deployment is finished, you can access your services at:
